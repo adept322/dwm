@@ -62,23 +62,25 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]   = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray5, "-sf", col_gray4, NULL };
 static const char *termcmd[]    = { "st", NULL };
-static const char *browserCmd[] = { "vivaldi", NULL };
+static const char *browsercmd[] = { "vivaldi", NULL };
 
-static const char *brightnessMonUpCmd[] = { "doas", "brightnessctl", "-d", "acpi_video0", "set", "+5%", NULL};
-static const char *brightnessMonDownCmd[] = { "doas", "brightnessctl", "-d", "acpi_video0", "set", "5%-", NULL};
-static const char *brightnessKbdUpCmd[] = { "doas", "brightnessctl", "-d", "smc::kbd_backlight", "set", "+10%", NULL};
-static const char *brightnessKbdDownCmd[] = { "doas", "brightnessctl", "-d", "smc::kbd_backlight", "set", "10%-", NULL};
+static const char *brightness_mon_up_cmd[] = { "doas", "brightnessctl", "-d", "acpi_video0", "set", "+5%", NULL};
+static const char *brightness_mon_down_cmd[] = { "doas", "brightnessctl", "-d", "acpi_video0", "set", "5%-", NULL};
+static const char *brightness_kbd_up_cmd[] = { "doas", "brightnessctl", "-d", "smc::kbd_backlight", "set", "+10%", NULL};
+static const char *brightness_kbd_down_cmd[] = { "doas", "brightnessctl", "-d", "smc::kbd_backlight", "set", "10%-", NULL};
 
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-    { MODKEY,                       XK_v,      spawn,          {.v = browserCmd } },
-    { NULL  ,                       XF86XK_MonBrightnessUp,    spawn,           {.v = brightnessMonUpCmd } },
-    { NULL  ,                       XF86XK_MonBrightnessDown,  spawn,           {.v = brightnessMonDownCmd } },
-    { NULL  ,                       XF86XK_KbdBrightnessUp,    spawn,           {.v = brightnessKbdUpCmd } },
-    { NULL  ,                       XF86XK_KbdBrightnessDown,  spawn,           {.v = brightnessKbdDownCmd } },
+    { MODKEY,                       XK_v,      spawn,          {.v = browsercmd } },
+    { NULL  ,                       XF86XK_MonBrightnessUp,    spawn,           {.v = brightness_mon_up_cmd } },
+    { NULL  ,                       XF86XK_MonBrightnessDown,  spawn,           {.v = brightness_mon_down_cmd } },
+    { NULL  ,                       XF86XK_KbdBrightnessUp,    spawn,           {.v = brightness_kbd_up_cmd } },
+    { NULL  ,                       XF86XK_KbdBrightnessDown,  spawn,           {.v = brightness_kbd_down_cmd } },
+    { NULL  ,                       XF86XK_LaunchA,            spawn,           {.v = dmenucmd } },
+    { NULL  ,                       XF86XK_LaunchB,            spawn,           {.v = dmenucmd } },
     { MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
