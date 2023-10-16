@@ -14,7 +14,6 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_gray5[]       = "#5A5A5A";
-static const char col_cyan[]        = "#005577"; 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -69,6 +68,15 @@ static const char *brightness_mon_down_cmd[] = { "doas", "brightnessctl", "-d", 
 static const char *brightness_kbd_up_cmd[] = { "doas", "brightnessctl", "-d", "smc::kbd_backlight", "set", "+10%", NULL};
 static const char *brightness_kbd_down_cmd[] = { "doas", "brightnessctl", "-d", "smc::kbd_backlight", "set", "10%-", NULL};
 
+static const char *amixer_vol_mute_cmd[] = { "amixer", "-D", "pulse", "sset", "Master", "toggle", NULL};
+static const char *amixer_vol_up_cmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL};
+static const char *amixer_vol_down_cmd[] = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL};
+static const char *amixer_vol_up_grad_cmd[] = { "amixer", "-D", "pulse", "sset", "Master", "1%+", NULL};
+static const char *amixer_vol_down_grad_cmd[] = { "amixer", "-D", "pulse", "sset", "Master", "1%-", NULL};
+
+static const char *playerctl_toggle[] = {"playerctl", "play-pause"};
+static const char *playerctl_next[] = {"playerctl", "next"};
+static const char *playerctl_prev[] = {"playerctl", "previous"};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -81,6 +89,14 @@ static const Key keys[] = {
     { NULL  ,                       XF86XK_KbdBrightnessDown,  spawn,           {.v = brightness_kbd_down_cmd } },
     { NULL  ,                       XF86XK_LaunchA,            spawn,           {.v = dmenucmd } },
     { NULL  ,                       XF86XK_LaunchB,            spawn,           {.v = dmenucmd } },
+    { NULL  ,                       XF86XK_AudioMute,          spawn,           {.v = amixer_vol_mute_cmd } },
+    { NULL  ,                       XF86XK_AudioRaiseVolume,   spawn,           {.v = amixer_vol_up_cmd } },
+    { NULL  ,                       XF86XK_AudioLowerVolume,   spawn,           {.v = amixer_vol_down_cmd } },
+    { MODKEY,                       XF86XK_AudioRaiseVolume,   spawn,           {.v = amixer_vol_up_grad_cmd } },
+    { MODKEY,                       XF86XK_AudioLowerVolume,   spawn,           {.v = amixer_vol_down_grad_cmd } },
+    { NULL  ,                       XF86XK_AudioPlay,          spawn,           {.v = playerctl_toggle } },
+    { NULL  ,                       XF86XK_AudioPrev,          spawn,           {.v = playerctl_prev } },
+    { NULL  ,                       XF86XK_AudioNext,          spawn,           {.v = playerctl_next } },
     { MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
