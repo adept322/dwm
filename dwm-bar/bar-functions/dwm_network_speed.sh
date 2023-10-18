@@ -54,7 +54,7 @@ function dwm_network_speed {
 
     printf "%s" "$SEP1"
     if [ "$IDENTIFIER" = "unicode" ]; then
-        printf "李 %s %s"  "$(download_speed)" "$(upload_speed)"
+        printf "󰖩  %s %s"  "$(download_speed)" "$(upload_speed)"
     else
         printf "Net %s %s"  "$(download_speed)" "$(upload_speed)"
     fi

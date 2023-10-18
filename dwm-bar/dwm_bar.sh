@@ -33,7 +33,7 @@ export SEP2="]"
 #. "$DIR/bar-functions/dwm_currency.sh"
 . "$DIR/bar-functions/dwm_date.sh"
 . "$DIR/bar-functions/dwm_keyboard.sh"
-#. "$DIR/bar-functions/dwm_loadavg.sh"
+. "$DIR/bar-functions/dwm_loadavg.sh"
 #. "$DIR/bar-functions/dwm_mail.sh"
 #. "$DIR/bar-functions/dwm_mpc.sh"
 #. "$DIR/bar-functions/dwm_networkmanager.sh"
@@ -43,7 +43,7 @@ export SEP2="]"
 #. "$DIR/bar-functions/dwm_transmission.sh"
 #. "$DIR/bar-functions/dwm_vpn.sh"
 #. "$DIR/bar-functions/dwm_weather.sh"
-#. "$DIR/bar-functions/dwm_network_speed.sh"
+. "$DIR/bar-functions/dwm_network_speed.sh"
 
 parallelize() {
     while true
@@ -60,7 +60,7 @@ parallelize &
 while true
 do
     # Append results of each func one by one to the upperbar string
-    upperbar="$(dwm_keyboard) $(dwm_pulse) $(dwm_battery) $(dwm_date)"
+    upperbar="$(dwm_loadavg) $(dwm_keyboard) $(dwm_pulse) $(dwm_network_speed) $(dwm_battery) $(dwm_date)"
     #upperbar="$upperbar$(dwm_alarm)"
     #upperbar="$upperbar$(dwm_alsa)"
     #upperbar="$upperbar$(dwm_backlight)"
@@ -90,5 +90,5 @@ do
      xsetroot -name "$upperbar"
     # Uncomment the line below to enable the lowerbar 
     #xsetroot -name "$upperbar;$lowerbar"
-    sleep 1
+    sleep 0.01
 done
